@@ -1,0 +1,8 @@
+{
+  "name": "_s-foundation-sites",
+  "version": "0.0.1",
+  "dependencies": {
+    "foundation-sites": "latest"
+  }
+}
+
