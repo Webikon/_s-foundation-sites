@@ -1,7 +1,7 @@
 // Gulp
 var gulp = require('gulp');
 
-// Plugins 
+// Plugins
 var browserSync = require('browser-sync');
 var concat = require('gulp-concat');
 var flatten = require('gulp-flatten');
@@ -13,7 +13,7 @@ var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
 var uglify = require('gulp-uglify');
 var URL = 'local.wordpress.dev';
-    
+
 
 // Paths
 var paths = {
@@ -78,7 +78,7 @@ gulp.task('sass-dev', function() {
         .pipe(plumber())
         .pipe(sourcemaps.init()) // Initialize sourcemap plugin
         .pipe(sass({
-            includePaths: ['assets/scss', 'bower_components/foundation-sites/scss'],
+            includePaths: ['assets/scss', 'bower_components/foundation-sites/scss', 'bower_components/motion-ui'],
             outputStyle: 'expanded'
         }).on('error', sass.logError))
         .pipe(sourcemaps.write())
@@ -90,7 +90,7 @@ gulp.task('sass-build', function() {
     gulp.src(paths.scss)
         .pipe(plumber())
         .pipe(sass({
-            includePaths: ['assets/scss', 'bower_components/foundation-sites/scss'],
+            includePaths: ['assets/scss', 'bower_components/foundation-sites/scss', 'bower_components/motion-ui'],
             outputStyle: 'expanded',
         }).on('error', sass.logError))
         .pipe(prefix({

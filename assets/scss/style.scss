@@ -8,9 +8,6 @@
 // Foundation settings
 @import "settings";
 
-// Third-party libraries
-@import 'vendor/normalize';
-
 // Sass utilities
 @import 'util/util';
 
@@ -22,7 +19,7 @@
 @import 'motion-ui';
 
 // These include Foundation HTML classes. Use wisely to reduce CSS file size.
-  // @include foundation-global-styles;
+  @include foundation-global-styles;
   // @include foundation-grid;
   @include foundation-typography;
   // @include foundation-button;
