@@ -2,7 +2,7 @@
   "name": "_s-foundation-sites",
   "version": "0.0.1",
   "dependencies": {
-    "foundation-sites": "latest"
+    "foundation-sites": "latest",
+    "motion-ui": "~1.1.0"
   }
 }
-
