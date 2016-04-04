@@ -3,6 +3,6 @@
   "version": "0.0.1",
   "dependencies": {
     "foundation-sites": "latest",
-    "motion-ui": "~1.1.0"
+    "motion-ui": "latest"
   }
 }
