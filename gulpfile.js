@@ -3,6 +3,7 @@ var gulp = require('gulp');
 
 // Plugins
 var browserSync = require('browser-sync');
+var babel = require('gulp-babel');
 var concat = require('gulp-concat');
 var flatten = require('gulp-flatten');
 var minifyCss = require('gulp-minify-css');
@@ -67,7 +68,8 @@ var paths = {
         ],
     php: [
       '*.php',
-      '**/*.php'
+      'inc/*.php',
+      'template-parts/*.php'
     ]
 };
 
@@ -131,6 +133,7 @@ gulp.task('vendorStyles', function() {
 gulp.task('concat-dev', function() {
   gulp.src( paths.scripts )
     .pipe(plumber())
+    .pipe(babel())
     .pipe(concat('theme.js'))
     .pipe(gulp.dest('dist/js'))
     .pipe(browserSync.stream({match: '**/*.js'}));
@@ -139,6 +142,7 @@ gulp.task('concat-dev', function() {
 gulp.task('concat-build', function() {
   gulp.src( paths.scripts )
     .pipe(plumber())
+    .pipe(babel())
     .pipe(concat('theme.js'))
     .pipe(uglify({
         outSourceMap: true
