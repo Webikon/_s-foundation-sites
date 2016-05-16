@@ -6,7 +6,7 @@ var browserSync = require('browser-sync');
 var babel = require('gulp-babel');
 var concat = require('gulp-concat');
 var flatten = require('gulp-flatten');
-var minifyCss = require('gulp-minify-css');
+var cleanCSS = require('gulp-clean-css');
 var plumber = require('gulp-plumber');
 var prefix = require('gulp-autoprefixer');
 var rename = require('gulp-rename');
@@ -100,7 +100,7 @@ gulp.task('sass-build', function() {
             remove: false,
             cascade: false
         }))
-        .pipe(minifyCss({compatibility: 'ie9'}))
+        .pipe(cleanCSS({compatibility: 'ie9'}))
         .pipe(rename({ suffix: '.min' }))
         .pipe(gulp.dest('./dist/css/'))
 });

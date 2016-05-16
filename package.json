@@ -23,7 +23,7 @@
     "gulp-babel": "^6.1.2",
     "gulp-concat": "latest",
     "gulp-flatten": "latest",
-    "gulp-minify-css": "latest",
+    "gulp-clean-css": "latest",
     "gulp-plumber": "latest",
     "gulp-rename": "latest",
     "gulp-sass": "latest",
