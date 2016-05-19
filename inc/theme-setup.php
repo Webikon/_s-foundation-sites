@@ -69,6 +69,13 @@ function _s_setup() {
 		'default-color' => 'ffffff',
 		'default-image' => '',
 	) ) );
+
+	// Editor style for nice typography in admin
+	if ( WP_DEBUG ) {
+		add_editor_style( get_template_directory_uri() . '/dist/css/editor-style.css' );
+	} else {
+		add_editor_style( get_template_directory_uri() . '/dist/css/editor-style.min.css' );
+	}
 }
 endif; // _s_setup
 add_action( 'after_setup_theme', '_s_setup' );
