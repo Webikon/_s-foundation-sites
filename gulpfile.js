@@ -13,8 +13,8 @@ var rename = require('gulp-rename');
 var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
 var uglify = require('gulp-uglify');
-var URL = 'local.wordpress.dev';
-
+var imagemin = require('gulp-imagemin');
+var URL = 'local.dev';
 
 // Paths
 var paths = {
@@ -60,8 +60,8 @@ var paths = {
     ],
     vendorStyles: [
     ],
-    images: ['images/**'],
-    fonts: ['fonts/**'],
+    images: ['assets/images/**'],
+    fonts: ['assets/fonts/**'],
     scss: [
         'assets/scss/*.scss',
         'assets/scss/**/*.scss',
@@ -105,6 +105,32 @@ gulp.task('sass-build', function() {
         .pipe(gulp.dest('./dist/css/'))
 });
 
+//Optimize images, SVGs, ...
+gulp.task('optimizeImages', function () {
+    return gulp.src(paths.images)
+        .pipe(imagemin(
+            [imagemin.gifsicle(),
+                imagemin.jpegtran(),
+                imagemin.optipng(),
+                imagemin.svgo([
+                    {
+                        removeStyleElement: true
+                    },
+                    {
+                        removeHiddenElems: true
+                    },
+                    {
+                        cleanupIDs: true
+                    },
+                    {
+                        convertStyleToAttrs: true
+                    }
+                ])
+            ]
+        ))
+        .pipe(gulp.dest('dist/images/'));
+});
+
 // Copy scripts
 gulp.task('copyScripts', function() {
     return gulp.src(paths.copyScripts)
@@ -112,6 +138,15 @@ gulp.task('copyScripts', function() {
         .pipe(gulp.dest('dist/js/'));
 });
 
+gulp.task('copyScripts-build', function() {
+    return gulp.src(paths.copyScripts)
+        .pipe(flatten())
+        .pipe(uglify({
+            outSourceMap: true
+        }))
+        .pipe(rename({ suffix: '.min' }))
+        .pipe(gulp.dest('dist/js/'));
+});
 
 // Copy vendor scripts
 gulp.task('vendorScripts', function() {
@@ -129,7 +164,6 @@ gulp.task('vendorStyles', function() {
 
 
 // Concat
-
 gulp.task('concat-dev', function() {
   gulp.src( paths.scripts )
     .pipe(plumber())
@@ -169,7 +203,17 @@ gulp.task('watch', function(event) {
     gulp.watch(paths.scss, ['sass-dev']);
     gulp.watch(paths.scripts, ['concat-dev']);
     gulp.watch(paths.copyScripts, ['copyScripts']);
+    gulp.watch(paths.images, ['optimizeImages']);
 });
 
-gulp.task('default', [ 'browser-sync', 'watch', 'sass-dev', 'concat-dev', 'copyScripts', 'vendorScripts', 'vendorStyles' ]);
-gulp.task('build', [ 'sass-build', 'concat-build', 'copyScripts', 'vendorScripts', 'vendorStyles' ]);
+gulp.task('watch-build', function(event) {
+    // browserSync.create();
+    gulp.watch(paths.php, ['reloadPHP']);
+    gulp.watch(paths.scss, ['sass-build']);
+    gulp.watch(paths.scripts, ['concat-build']);
+    gulp.watch(paths.copyScripts, ['copyScripts-build']);
+    gulp.watch(paths.images, ['optimizeImages']);
+});
+
+gulp.task('default', [ 'browser-sync', 'watch', 'sass-dev', 'concat-dev', 'copyScripts', 'vendorScripts', 'vendorStyles', 'optimizeImages' ]);
+gulp.task('build', [ 'browser-sync', 'watch', 'sass-build', 'concat-build', 'copyScripts-build', 'vendorScripts', 'vendorStyles' ]);

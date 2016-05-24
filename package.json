@@ -24,6 +24,7 @@
     "gulp-concat": "latest",
     "gulp-flatten": "latest",
     "gulp-clean-css": "latest",
+    "gulp-imagemin": "latest",
     "gulp-plumber": "latest",
     "gulp-rename": "latest",
     "gulp-sass": "latest",
