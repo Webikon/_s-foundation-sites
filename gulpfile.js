@@ -216,4 +216,4 @@ gulp.task('watch-build', function(event) {
 });
 
 gulp.task('default', [ 'browser-sync', 'watch', 'sass-dev', 'concat-dev', 'copyScripts', 'vendorScripts', 'vendorStyles', 'optimizeImages' ]);
-gulp.task('build', [ 'browser-sync', 'watch', 'sass-build', 'concat-build', 'copyScripts-build', 'vendorScripts', 'vendorStyles' ]);
+gulp.task('build', [ 'browser-sync', 'watch-build', 'sass-build', 'concat-build', 'copyScripts-build', 'vendorScripts', 'vendorStyles' ]);

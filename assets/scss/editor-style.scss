@@ -9,10 +9,10 @@
 @include foundation-typography;
 @include foundation-button;
 
-@import "mixins/mixins-master";
-
-@import "media/media";
-@import "forms/forms";
+// Include theme styles
+@import "utils/utils";
+@import "elements/elements";
+// @import "components/components";
 
 body#tinymce {
 	overflow-x: hidden;

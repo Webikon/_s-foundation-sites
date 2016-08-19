@@ -55,15 +55,11 @@
   // @include foundation-tooltip;
   // @include foundation-top-bar;
 
-
-
-@import "mixins/mixins-master";
-
+// Import theme styles
+@import "utils/utils";
 @import "elements/elements";
-@import "forms/forms";
-@import "layout/layout";
-@import "media/media";
-@import "navigation/navigation";
+@import "components/components";
+@import "vendors/vendors";
+@import "templates/templates";
 
-@import "modules/accessibility";
-@import "modules/infinite-scroll";
+@import "shame";
